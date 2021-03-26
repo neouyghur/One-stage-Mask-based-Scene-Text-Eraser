@@ -1,0 +1,67 @@
+MODE: 1            # 1: train, 2: test, 3: eval 4: eval-test
+MODEL: 1            # 1: mask model, 2: inpaint model, 3: mask-inpaint model, 4: joint model
+MASK: 7             # 1: random block, 2: half, 3: external, 4: (external, random block), 5: (external, random block, half)
+NMS: 1              # 0: no non-max-suppression, 1: applies non-max-suppression on the external edges by multiplying by Canny
+SEED: 10            # random seed
+GPU: [0]            # list of gpu ids
+DEBUG: 0            # turns on debugging mode
+VERBOSE: 1          # turns on verbose mode in the output console
+
+OUTPUT_DIR : /media/osman/megamind/text_removal_gan_training/OSMTRNET
+
+G1_MODEL_PATH: null
+D1_MODEL_PATH: null
+
+# EnsNet
+TRAIN_DATA: /media/osman/megamind/SynthText/EnsNet_dataset/json_based/real_syn_train.json
+VAL_DATA: /media/osman/megamind/SynthText/EnsNet_dataset/json_based/real_syn_validation.json
+TEST_DATA: /media/osman/megamind/SynthText/EnsNet_dataset/json_based/EnsNet_syn_test.json
+
+PRINT_AT_STEP: 10
+SAVE_SCALR_AT_STEP: 10     # Summary at step
+SAVE_IMAGE_AT_STEP: 100     # Summary at step
+SAVE_MODEL_AT_STEP: 2000
+SAVE_HIST_AT_STEP: 100
+
+WORD_BB_PERCENT_THRESHOLD : 0   # Word mask percentage in a mask image if
+CHAR_BB_PERCENT_THRESHOLD : 0  # Character mask percentage in a mask image if
+
+BATCH_SIZE: 8               # input batch size for training
+INPUT_SIZE: 256               # input image size for training 0 for original size
+
+LR: 0.0001                  # learning rate
+STEP_SIZE: 30                  # Schedule learning
+D2G_LR: 5                     # discriminator/generator learning rate ratio
+BETA1: 0.0                    # adam optimizer beta1
+BETA2: 0.9                    # adam optimizer beta2
+SIGMA: 2                      # standard deviation of the Gaussian filter used in Canny edge detector (0: random, -1: no edge)
+
+MASK_THRESHOLD: 25            # mask threshold
+MASK_SAFE_PAD: 2              #
+MASK_PAD: 512                  # if -1 generate random  PAD
+EDGE_THRESHOLD: 0.5           # edge detection threshold
+
+
+PRO_STEP: 1                   # Progress step
+WITH_STYLE_CONTENT_LOSS: true
+WITH_FEATURE_MATCH_LOSS: false
+
+
+L1_LOSS_WEIGHT: 5             # l1 loss weight
+FM_LOSS_WEIGHT: 1            # feature-matching loss weight
+STYLE_LOSS_WEIGHT: 25        # style loss weight
+CONTENT_LOSS_WEIGHT: 0.1      # perceptual loss weight
+TV_LOSS_WEIGHT: 0             # TV loss
+INPAINT_ADV_LOSS_WEIGHT: 0.1  # adversarial loss weight
+
+GAN_LOSS: hinge               # nsgan | lsgan | hinge
+GAN_POOL_SIZE: 0              # fake images pool size
+MASK_REFINE_LOSS: tversky     # tversky | l1
+
+MAX_ITERS: 2e5             # maximum number of iterations to train the model
+SAVE_INTERVAL: 5000          # how many iterations to wait before saving model (0: never)
+SAMPLE_INTERVAL: 10000       # how many iterations to wait before sampling (0: never)
+SAMPLE_SIZE: 6               # number of images to sample
+EVAL_INTERVAL: 10000         # how many iterations to wait before model evaluation (0: never)
+N_EVAL: 100                  # Number of eval
+LOG_INTERVAL: 0              # how many iterations to wait before logging training status (0: never)
