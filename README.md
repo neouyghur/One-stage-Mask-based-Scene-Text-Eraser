@@ -3,7 +3,9 @@ This is the source code of [MTRNet++: One-stage Mask-based Scene Text Eraser](ht
 
 Note some parts of the codes are taken from [edge-connect](https://github.com/knazeri/edge-connect).
 
-If you need further help, please raise an issue.
+In this work, we have used the Oxford Synthetic Text dataset and SCUT text removal dataset. To create necessary files for the training and testing, please check related issues, scripts, and files. You can use ```scripts/create_Oxford_dataset.py``` to generate files for Oxford Synthetic dataset. For the SCUT dataset, you can use the files in the ```data``` folder. 
+
+If you need further help, please raise an issue or send email to me. 
 
 ## Prerequisites
 - Python 3
@@ -11,9 +13,11 @@ If you need further help, please raise an issue.
 - NVIDIA GPU + CUDA cuDNN
 
 ### Other Networks
-You can find network architectures for [MTRNet](https://arxiv.org/abs/1903.04092) and [ENSNet](https://arxiv.org/abs/1812.00723) under Related Networks. If you want to test these codes, you need to replace them with MTRNet++ architecture under `src/networks`.
+You can find network architectures for [MTRNet](https://arxiv.org/abs/1903.04092) and [ENSNet](https://arxiv.org/abs/1812.00723) under Related Networks. If you want to test these codes, you need to replace them with MTRNet++ architecture under `src/networks`. Note that the original MTRNet is implemented with Tensorflow and the backbone is U-Net. However, here, the MTRNet is using the same backbone of the MTRNet++ which is a lighter backbone compared to MTRNet.
 
 ### Citation
+
+If you find our code useful to your research, please cite our papers [MTRNet](https://arxiv.org/abs/1903.04092) and [MTRNet++](https://arxiv.org/abs/1912.07183): 
 
 ```
 @article{tursun2020mtrnet++,
